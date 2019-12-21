@@ -19,14 +19,14 @@ async function postMessage(): Promise<string> {
   const payload = {
     msgtype: type,
     [type]: {
-      content: content
+      content
     },
     mentioned_list: at.toLowerCase().includes('all') ? ['@all'] : at.split(',')
   }
   return post(payload)
 }
 
-async function post(body: any): Promise<string> {
+async function post(body: object): Promise<string> {
   const url: string = core.getInput('url')
   const rsp = await got.post(url, {
     headers: {
@@ -35,7 +35,7 @@ async function post(body: any): Promise<string> {
     body: JSON.stringify(body)
   })
 
-  console.log(rsp.body)
+  core.debug(rsp.body)
   return rsp.body
 }
 

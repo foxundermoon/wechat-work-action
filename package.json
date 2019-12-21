@@ -1,13 +1,13 @@
 {
-  "name": "typescript-action",
-  "version": "0.0.0",
-  "private": true,
-  "description": "TypeScript template action",
+  "name": "wechat-work-action",
+  "version": "0.0.1",
+  "private": false,
+  "description": "wechat work message action",
   "main": "lib/main.js",
   "scripts": {
     "build": "tsc",
-    "format": "prettier --write **/*.ts",
-    "format-check": "prettier --check **/*.ts",
+    "format": "prettier --write **/*.{ts,yml,json}",
+    "format-check": "prettier --check **/*.{ts,yml,json}",
     "lint": "eslint src/**/*.ts",
     "pack": "ncc build",
     "test": "jest",
@@ -15,17 +15,22 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/actions/typescript-action.git"
+    "url": "git+https://github.com/foxundermoon/wechat-work-action.git"
   },
   "keywords": [
+    "wechat",
+    "wechat work",
+    "messager",
+    "message",
     "actions",
     "node",
     "setup"
   ],
-  "author": "YourNameOrOrganization",
+  "author": "foxundermoon",
   "license": "MIT",
   "dependencies": {
-    "@actions/core": "^1.2.0"
+    "@actions/core": "^1.2.0",
+    "got": "^10.1.0"
   },
   "devDependencies": {
     "@types/jest": "^24.0.23",

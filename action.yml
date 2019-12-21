@@ -1,10 +1,27 @@
-name: 'Your name here'
-description: 'Provide a description here'
-author: 'Your name or organization here'
+name: 'Wechat Work action'
+description: 'message by Wechat Work'
+author: 'foxundermoon'
 inputs:
-  myInput:              # change this
-    description: 'input description here'
+  url:
+    description: 'web hook url'
     default: 'default value if applicable'
+    required: true
+  type:
+    default: text
+    required: false
+    description: the msg type
+  content:
+    required: true
+    description: the msg content
+  at:
+    description: '@ users'
+    default: ''
+    required: false
+
 runs:
   using: 'node12'
   main: 'dist/index.js'
+
+branding:
+  color: 'green'
+  icon: 'message-square'
