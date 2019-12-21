@@ -1,117 +1,39 @@
 <p align="center">
-  <a href="https://github.com/actions/typescript-action/actions"><img alt="typescript-action status" src="https://github.com/actions/typescript-action/workflows/build-test/badge.svg"></a>
+  <a href="https://github.com/foxundermoon/wechat-work-action"><img alt="wechat-work-action status" src="https://github.com/foxundermoon/wechat-work-action/workflows/build-test/badge.svg"></a>
 </p>
 
-# Create a JavaScript Action using TypeScript
+## ✨ Example Usage
 
-Use this template to bootstrap the creation of a JavaScript action.:rocket:
-
-This template includes compilication support, tests, a validation workflow, publishing, and versioning guidance.  
-
-If you are new, there's also a simpler introduction.  See the [Hello World JavaScript Action](https://github.com/actions/hello-world-javascript-action)
-
-## Create an action from this template
-
-Click the `Use this Template` and provide the new repo details for your action
-
-## Code in Master
-
-Install the dependencies  
-```bash
-$ npm install
+```yml
+- name: ci status
+  uses: foxundermoon/wechat-work-action@v1
+  with:
+    url: ${{ secrets.WECHAT_WORK_WEBHOOK_URL }}
+    type: markdown
+    content: |
+      ## action test
+      > from github action test
+      - repository: ${{ github.repository }}
+      - committer: ${{ github.actor }}
+      - compare: [view](${{ github.event.compare }})
+      - job status: ${{ job.status }}
 ```
 
-Build the typescript
-```bash
-$ npm run build
-```
+🔐 Set your secrets here: `https://github.com/USERNAME/REPO/settings/secrets`.
 
-Run the tests :heavy_check_mark:  
-```bash
-$ npm test
+Contexts and expression syntax for GitHub Actions, here: https://help.github.com/en/articles/contexts-and-expression-syntax-for-github-actions#github-context
 
- PASS  ./index.test.js
-  ✓ throws invalid number (3ms)
-  ✓ wait 500 ms (504ms)
-  ✓ test runs (95ms)
+**Result**
 
-...
-```
+## Options
 
-## Change action.yml
+| option  | type   | required | default | description                                                                              |
+| ------- | ------ | -------- | ------- | ---------------------------------------------------------------------------------------- |
+| url     | string | Yes      | none    | The full address of webhook: https://qyapi.weixin.qq.com/cgi-bin/webhook/send?key=xxxxxx |
+| type    | string | No       | text    | message type，support (text,markdown,custom)                                             |
+| content | string | Yes      | none    | Message content, text or markdown or json string                                         |
+| at      | string | No       | none    | At user,Use commas to separate, for example: 13812345678,13898754321 or all              |
 
-The action.yml contains defines the inputs and output for your action.
+if type is custom, content is wecaht-work api json request body,for example
 
-Update the action.yml with your name, description, inputs and outputs for your action.
-
-See the [documentation](https://help.github.com/en/articles/metadata-syntax-for-github-actions)
-
-## Change the Code
-
-Most toolkit and CI/CD operations involve async operations so the action is run in an async function.
-
-```javascript
-import * as core from '@actions/core';
-...
-
-async function run() {
-  try { 
-      ...
-  } 
-  catch (error) {
-    core.setFailed(error.message);
-  }
-}
-
-run()
-```
-
-See the [toolkit documentation](https://github.com/actions/toolkit/blob/master/README.md#packages) for the various packages.
-
-## Publish to a distribution branch
-
-Actions are run from GitHub repos.  We will create a releases branch and only checkin production modules (core in this case). 
-
-Comment out node_modules in .gitignore and create a releases/v1 branch
-```bash
-# comment out in distribution branches
-# node_modules/
-```
-
-```bash
-$ git checkout -b releases/v1
-$ git commit -a -m "prod dependencies"
-```
-
-```bash
-$ npm prune --production
-$ git add node_modules
-$ git commit -a -m "prod dependencies"
-$ git push origin releases/v1
-```
-
-Your action is now published! :rocket: 
-
-See the [versioning documentation](https://github.com/actions/toolkit/blob/master/docs/action-versioning.md)
-
-## Validate
-
-You can now validate the action by referencing the releases/v1 branch
-
-```yaml
-uses: actions/typescript-action@releases/v1
-with:
-  milliseconds: 1000
-```
-
-See the [actions tab](https://github.com/actions/javascript-action/actions) for runs of this action! :rocket:
-
-## Usage:
-
-After testing you can [create a v1 tag](https://github.com/actions/toolkit/blob/master/docs/action-versioning.md) to reference the stable and tested action
-
-```yaml
-uses: actions/typescript-action@v1
-with:
-  milliseconds: 1000
-```
+> content: {"msgtype": "text", "text": {"content": "我就是我, 是不一样的烟火"}}
