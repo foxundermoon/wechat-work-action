@@ -1,5 +1,5 @@
 name: 'Wechat Work action'
-description: 'message by Wechat Work'
+description: 'message by Wechat Work, super tiny.  run one time cost 1s .support linux macos and window, base node runner not by docker'
 author: 'foxundermoon'
 inputs:
   url:
