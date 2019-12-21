@@ -6,8 +6,8 @@
   "main": "lib/main.js",
   "scripts": {
     "build": "tsc",
-    "format": "prettier --write **/*.{ts,yml,json}",
-    "format-check": "prettier --check **/*.{ts,yml,json}",
+    "format": "prettier --write **/*.{ts,yml,json,md}",
+    "format-check": "prettier --check **/*.{ts,yml,json,md}",
     "lint": "eslint src/**/*.ts",
     "pack": "ncc build",
     "test": "jest",
